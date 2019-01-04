@@ -40,7 +40,11 @@
           video.mozSrcObject = stream;
         } else {
           var vendorURL = window.URL || window.webkitURL;
-          video.src = vendorURL.createObjectURL(stream);
+          try {
+            video.srcObject = stream;
+          } catch (error) {
+            video.src = vendorURL.createObjectURL(stream);
+          }
         }
         video.play();
       },
